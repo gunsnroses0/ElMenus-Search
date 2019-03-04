@@ -75,7 +75,7 @@ DECLARE
 ref refcursor;
 BEGIN
 OPEN ref FOR SELECT * FROM restaurants
-WHERE name LIKE '%'||i||'%';
+WHERE lower(name) LIKE '%'||lower(i)||'%';
 RETURN ref;
 END;
 $BODY$
