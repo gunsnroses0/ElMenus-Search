@@ -16,6 +16,7 @@ public class RetrieveSearch extends ConcreteCommand {
 
 	@Override
 	protected void execute() {
+		this.consume("r1");
         HashMap < String, Object > props = parameters;
         Channel channel = (Channel) props.get("channel");
         JSONParser parser = new JSONParser();

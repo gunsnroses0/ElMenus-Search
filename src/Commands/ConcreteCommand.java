@@ -19,7 +19,7 @@ public abstract class ConcreteCommand extends Command {
 			connection = factory.newConnection();
 			channel = connection.createChannel();
 			channel.queueDeclare(RPC_QUEUE_NAME, false, false, false, null);
-
+	
 			System.out.println(" [x] Awaiting DB-RPC Responses");
 
 			Consumer consumer = new DefaultConsumer(channel) {
