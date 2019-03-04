@@ -1,17 +1,9 @@
 import Commands.Command;
-import Commands.CreateRestaurant;
-import Commands.RetrieveRestaurant;
-
-//import Commands.delete.DeleteMessage;
-//import Commands.get.GetMessage;
-//import Commands.get.GetMessages;
-//import Commands.patch.UpdateMessage;
-//import Commands.post.CreateMessage;
+import Commands.RetrieveSearch;
 import com.rabbitmq.client.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.Executors;
@@ -19,7 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeoutException;
 
 public class SearchService {
-	private static final String RPC_QUEUE_NAME = "restaurants-request";
+	private static final String RPC_QUEUE_NAME = "search-request";
 
 	public static void main(String[] argv) {
 
@@ -52,18 +44,10 @@ public class SearchService {
 						JSONObject messageBody = (JSONObject) parser.parse(message);
 						String command = (String) messageBody.get("command");
 						Command cmd = null;
-						System.out.println(command);
+					
 						switch (command) {
-						case "CreateRestaurants":
-							cmd = new CreateRestaurant();
-							break;
-						case "RetrieveRestaurants":
-							cmd = new RetrieveRestaurant();
-							break;
-//                            case "UpdateMessages":   cmd = new UpdateMessage();
-//                                break;
-//                            case "DeleteMessages":   cmd = new DeleteMessage();
-//                                break;
+							case "RetrieveSearch": cmd = new RetrieveSearch();
+								break;
 						}
 
 						HashMap<String, Object> props = new HashMap<String, Object>();
